@@ -1,0 +1,6 @@
+{
+  "name": "foo",
+  "engines": {
+    "install-node": "4.4.0"
+  }
+}

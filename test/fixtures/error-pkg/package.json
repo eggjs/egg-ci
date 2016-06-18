@@ -1,0 +1,6 @@
+{
+  "name": "@ali/ci",
+  "version": "1.0.0",
+  "scripts": {
+    "ci-test": "npm run cov"
+  }

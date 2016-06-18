@@ -1,0 +1,11 @@
+{
+  "name": "egg-ci",
+  "version": "1.0.0",
+  "scripts": {
+    "ci": "npm run cov"
+  },
+  "ci": {
+    "versions": ["1", "2", "4", "5"],
+    "npminstall": false
+  }
+}

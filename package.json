@@ -1,0 +1,49 @@
+{
+  "name": "egg-ci",
+  "version": "1.0.0",
+  "description": "Auto gen ci config file",
+  "main": "index.js",
+  "files": [
+    "templates",
+    "install.js"
+  ],
+  "scripts": {
+    "env": "node -e 'console.log(process.env)'",
+    "test": "NODE_ENV=test ava",
+    "cov": "NODE_ENV=test nyc ava && nyc report --reporter=json --reporter=lcov",
+    "lint": "eslint *.js test --fix",
+    "ci": "npm run lint && npm run cov",
+    "postinstall": "node install.js",
+    "autod": "autod -w --prefix='^'"
+  },
+  "keywords": [],
+  "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eggjs/egg-ci.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "nunjucks": "^2.4.2"
+  },
+  "devDependencies": {
+    "autod": "^2.6.1",
+    "ava": "^0.15.2",
+    "nyc": "^6.6.1"
+  },
+  "engine": {
+    "node": ">=4.0.0"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ]
+  },
+  "ci": {
+    "type": "travis",
+    "versions": [
+      "4",
+      "5"
+    ]
+  }
+}

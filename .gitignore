@@ -1,0 +1,16 @@
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+coverage/
+
+node_modules
+
+dump.rdb
+.DS_Store
+test/fixtures/**/*.yml
+.nyc_output/

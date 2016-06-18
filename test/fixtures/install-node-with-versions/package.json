@@ -1,0 +1,13 @@
+{
+  "name": "foo",
+  "engines": {
+    "install-node": "4.4"
+  },
+  "ci": {
+    "versions": [
+      "0.12",
+      "4",
+      "5"
+    ]
+  }
+}
