@@ -29,6 +29,8 @@
   "devDependencies": {
     "autod": "^2.6.1",
     "ava": "^0.15.2",
+    "eslint": "^2.13.0",
+    "eslint-config-egg": "^2.0.0",
     "nyc": "^6.6.1"
   },
   "engine": {
