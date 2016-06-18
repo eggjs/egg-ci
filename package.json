@@ -16,7 +16,12 @@
     "postinstall": "node install.js",
     "autod": "autod -w --prefix='^'"
   },
-  "keywords": [],
+  "keywords": [
+    "egg",
+    "travis",
+    "appveyor",
+    "ci"
+  ],
   "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)",
   "repository": {
     "type": "git",
@@ -42,7 +47,6 @@
     ]
   },
   "ci": {
-    "type": "travis",
     "versions": [
       "4",
       "5"

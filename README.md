@@ -32,9 +32,9 @@ Add `ci` property to your `package.json`:
 
 ```js
 "ci": {
-  "type": "travis", // default ci env type is 'travis'
+  "type": "travis, appveyor", // default ci env type is 'travis, appveyor'
   "npminstall": true, // use `npminstall` or `npm install`, default is true
-  "versions": [ "4" ], // test LTS node version by default
+  "version": "4", // test LTS node version by default
   "command": "ci" // npm ci command, default is `npm run ci`
 }
 ```

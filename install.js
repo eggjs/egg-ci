@@ -31,12 +31,13 @@ try {
 }
 
 const config = Object.assign({
-  type: 'travis', // default is travis ci
-  versions: [],
+  type: 'travis, appveyor', // default is travis and appveyor
+  version: '',
   npminstall: true,
   command: 'ci',
 }, pkg.ci);
-config.versions = config.versions || [];
+config.types = arrayify(config.type);
+config.versions = arrayify(config.version);
 if (config.versions.length === 0) {
   const installNode = pkg.engines && (pkg.engines['install-node'] || pkg.engines['install-alinode']);
   if (!installNode) {
@@ -48,17 +49,25 @@ if (config.versions.length === 0) {
 let ymlName = '';
 let ymlContent = '';
 
-if (config.type === 'travis') {
-  ymlContent = engine.renderString(getTpl('travis'), config);
-  ymlName = '.travis.yml';
-} else {
-  throw new Error(`${config.type} type not support`);
+for (const type of config.types) {
+  if (type === 'travis') {
+    ymlContent = engine.renderString(getTpl('travis'), config);
+    ymlName = '.travis.yml';
+  } else if (type === 'appveyor') {
+    ymlContent = engine.renderString(getTpl('appveyor'), config);
+    ymlName = 'appveyor.yml';
+  } else {
+    throw new Error(`${type} type not support`);
+  }
+  const ymlPath = path.join(root, ymlName);
+  fs.writeFileSync(ymlPath, ymlContent);
+  console.log(`[egg-ci] create ${ymlPath} success`);
 }
-
-const ymlPath = path.join(root, ymlName);
-fs.writeFileSync(ymlPath, ymlContent);
-console.log(`[egg-ci] create ${ymlPath} success`);
 
 function getTpl(name) {
   return fs.readFileSync(path.join(__dirname, 'templates', name), 'utf8');
+}
+
+function arrayify(str) {
+  return str.split(',').map(s => s.trim()).filter(s => !!s);
 }
