@@ -69,5 +69,6 @@ function getTpl(name) {
 }
 
 function arrayify(str) {
-  return str.split(',').map(s => s.trim()).filter(s => !!s);
+  if (Array.isArray(str)) return str;
+  return str.split(/\s*,\s*/).filter(s => !!s);
 }

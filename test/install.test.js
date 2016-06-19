@@ -19,6 +19,17 @@ test('travis and npminstall = false', t => {
   t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
 });
 
+test('travis and versions in array', t => {
+  const env = Object.assign({}, process.env, {CI_ROOT_FOR_TEST: getRoot('array')});
+  execSync(cmd, {env});
+  const yml = fs.readFileSync(getYml('travis', '.travis.yml'), 'utf8');
+  t.regex(yml, /\- '1'/);
+  t.regex(yml, /\- '2'/);
+  t.regex(yml, /\- '4'/);
+  t.regex(yml, /\- '5'/);
+  t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
+});
+
 test('default', t => {
   const env = Object.assign({}, process.env, {CI_ROOT_FOR_TEST: getRoot('default')});
   execSync(cmd, {env});
