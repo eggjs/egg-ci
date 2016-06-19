@@ -1,4 +1,10 @@
 
+1.0.2 / 2016-06-19
+==================
+
+  * fix: package name is no scope (#2)
+  * feat: support array versions (#1)
+
 1.0.1 / 2016-06-18
 ==================
 
