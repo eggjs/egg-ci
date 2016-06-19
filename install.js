@@ -12,9 +12,9 @@ const engine = nunjucks.configure({
 let root;
 // support npminstall path
 if (__dirname.indexOf('.npminstall') >= 0) {
-  root = path.join(__dirname, '../../../../../../..');
+  root = path.join(__dirname, '../../../../..');
 } else {
-  root = path.join(__dirname, '../../..');
+  root = path.join(__dirname, '../..');
 }
 
 if (process.env.CI_ROOT_FOR_TEST) {
