@@ -39,7 +39,8 @@ const config = Object.assign({
 config.types = arrayify(config.type);
 config.versions = arrayify(config.version);
 if (config.versions.length === 0) {
-  const installNode = pkg.engines && (pkg.engines['install-node'] || pkg.engines['install-alinode']);
+  const installNode = pkg.engines && (pkg.engines['install-node'] ||
+    pkg.engines['install-alinode']);
   if (!installNode) {
     // default version is LTS
     config.versions = [ '4' ];

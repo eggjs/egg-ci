@@ -34,8 +34,8 @@
   "devDependencies": {
     "autod": "^2.6.1",
     "ava": "^0.15.2",
-    "eslint": "^2.13.0",
-    "eslint-config-egg": "^2.0.0",
+    "eslint": "3",
+    "eslint-config-egg": "3",
     "nyc": "^6.6.1"
   },
   "engine": {
@@ -44,12 +44,6 @@
   "ava": {
     "files": [
       "test/**/*.test.js"
-    ]
-  },
-  "ci": {
-    "versions": [
-      "4",
-      "5"
     ]
   }
 }
