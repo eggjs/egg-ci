@@ -1,4 +1,10 @@
 
+1.0.3 / 2016-07-17
+==================
+
+  * deps: eslint-config-egg@3 (#4)
+  * fix: use npminstall to install codecov (#3)
+
 1.0.2 / 2016-06-19
 ==================
 
