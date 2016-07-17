@@ -9,7 +9,7 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   {%- if npminstall %}
-  - npm i npminstall && npminstall
+  - npm i npminstall && node_modules\.bin\npminstall
   {%- else %}
   - npm i
   {%- endif %}
