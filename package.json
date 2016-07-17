@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "env": "node -e 'console.log(process.env)'",
-    "test": "NODE_ENV=test ava",
-    "cov": "NODE_ENV=test nyc ava && nyc report --reporter=json --reporter=lcov",
+    "test": "ava",
+    "cov": "nyc ava && nyc report --reporter=json --reporter=lcov",
     "lint": "eslint *.js test --fix",
     "ci": "npm run lint && npm run cov",
     "postinstall": "node install.js",
@@ -32,11 +32,11 @@
     "nunjucks": "^2.4.2"
   },
   "devDependencies": {
-    "autod": "^2.6.1",
+    "autod": "2",
     "ava": "^0.15.2",
     "eslint": "3",
     "eslint-config-egg": "3",
-    "nyc": "^6.6.1"
+    "nyc": "6"
   },
   "engine": {
     "node": ">=4.0.0"
