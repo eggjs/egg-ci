@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "nunjucks": "^2.4.2"
+    "nunjucks": "2.4.3"
   },
   "devDependencies": {
     "autod": "2",
