@@ -29,11 +29,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "nunjucks": "^2.4.2"
+    "nunjucks": "^3.0.0"
   },
   "devDependencies": {
     "autod": "2",
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "eslint": "3",
     "eslint-config-egg": "3",
     "nyc": "6"
