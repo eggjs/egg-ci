@@ -5,6 +5,7 @@ node_js:
   - '{{version}}'
 {%- else %}
   - '4'
+  - '6'
 {%- endfor %}
 {%- if npminstall %}
 install:
