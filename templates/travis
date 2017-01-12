@@ -4,8 +4,8 @@ node_js:
 {%- for version in versions %}
   - '{{version}}'
 {%- else %}
-  - '4'
   - '6'
+  - '7'
 {%- endfor %}
 {%- if npminstall %}
 install:

@@ -35,10 +35,10 @@ test('default', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('default', '.travis.yml'), 'utf8');
   t.regex(yml, /\- npm i npminstall && npminstall/);
-  t.regex(yml, /\- '4'/);
+  t.regex(yml, /\- '6'/);
   const appveyoryml = fs.readFileSync(getYml('default', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '4'/);
+  t.regex(appveyoryml, /\- nodejs_version: '6'/);
 });
 
 test('default on install-node', t => {
@@ -46,10 +46,10 @@ test('default on install-node', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('install-node', '.travis.yml'), 'utf8');
   t.regex(yml, /\- npm i npminstall && npminstall/);
-  t.regex(yml, /\- '4'/);
+  t.regex(yml, /\- '6'/);
   const appveyoryml = fs.readFileSync(getYml('install-node', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '4'/);
+  t.regex(appveyoryml, /\- nodejs_version: '6'/);
 });
 
 test('default on install-alinode', t => {
@@ -57,10 +57,10 @@ test('default on install-alinode', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('install-alinode', '.travis.yml'), 'utf8');
   t.regex(yml, /\- npm i npminstall && npminstall/);
-  t.regex(yml, /\- '4'/);
+  t.regex(yml, /\- '6'/);
   const appveyoryml = fs.readFileSync(getYml('install-alinode', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '4'/);
+  t.regex(appveyoryml, /\- nodejs_version: '6'/);
 });
 
 test('default on install-node-with-versions and ci.versions', t => {
