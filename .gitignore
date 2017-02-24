@@ -13,4 +13,5 @@ node_modules
 dump.rdb
 .DS_Store
 test/fixtures/**/*.yml
+test/fixtures/*/LICENSE
 .nyc_output/
