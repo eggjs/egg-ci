@@ -35,6 +35,7 @@ const config = Object.assign({
   version: '',
   npminstall: true,
   command: 'ci',
+  license: true,
 }, pkg.ci);
 config.types = arrayify(config.type);
 config.versions = arrayify(config.version);
@@ -63,6 +64,20 @@ for (const type of config.types) {
   const ymlPath = path.join(root, ymlName);
   fs.writeFileSync(ymlPath, ymlContent);
   console.log(`[egg-ci] create ${ymlPath} success`);
+}
+
+if (config.license) {
+  let data = {
+    year: new Date().getFullYear(),
+    fullname: 'Alibaba Group Holding Limited and other contributors.',
+  };
+  if (typeof config.license === 'object') {
+    data = Object.assign(data, config.license);
+  }
+  const licenseContent = engine.renderString(getTpl('license'), data);
+  const licensePath = path.join(root, 'LICENSE');
+  fs.writeFileSync(licensePath, licenseContent);
+  console.log(`[egg-ci] create ${licensePath} success`);
 }
 
 function getTpl(name) {

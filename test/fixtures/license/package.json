@@ -1,0 +1,6 @@
+{
+  "name": "license",
+  "ci": {
+    "license": true
+  }
+}
