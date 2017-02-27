@@ -1,0 +1,6 @@
+{
+  "name": "service",
+  "ci": {
+    "services": "redis-server, mysql"
+  }
+}
