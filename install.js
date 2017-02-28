@@ -35,7 +35,7 @@ const config = Object.assign({
   version: '',
   npminstall: true,
   command: 'ci',
-  license: true,
+  license: false,
 }, pkg.ci);
 config.types = arrayify(config.type);
 config.versions = arrayify(config.version);

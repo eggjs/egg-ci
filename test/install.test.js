@@ -4,9 +4,21 @@ const test = require('ava');
 const execSync = require('child_process').execSync;
 const fs = require('fs');
 const path = require('path');
+const rimraf = require('rimraf');
 
 const filepath = path.join(__dirname, '../install.js');
 const cmd = `node ${filepath}`;
+
+function clean() {
+  const root = path.join(__dirname, 'fixtures');
+  fs.readdirSync(root).forEach(name => {
+    [ '.travis.yml', 'appveyor.yml', 'LICENSE' ].forEach(file => {
+      rimraf.sync(path.join(root, name, file));
+    });
+  });
+}
+
+test.before(clean);
 
 test('travis and npminstall = false', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('travis') });
@@ -17,6 +29,7 @@ test('travis and npminstall = false', t => {
   t.regex(yml, /\- '4'/);
   t.regex(yml, /\- '5'/);
   t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
+  t.falsy(fs.existsSync(getYml('travis', 'LICENSE')));
 });
 
 test('travis and versions in array', t => {

@@ -37,7 +37,8 @@
     "ava": "^0.16.0",
     "eslint": "3",
     "eslint-config-egg": "3",
-    "nyc": "10"
+    "nyc": "10",
+    "rimraf": "^2.6.1"
   },
   "engine": {
     "node": ">=4.0.0"

@@ -36,7 +36,7 @@ Add `ci` property to your `package.json`:
   "npminstall": true, // use `npminstall` or `npm install`, default is true
   "version": "6", // test LTS node version by default
   "command": "ci", // npm ci command, default is `npm run ci`,
-  "license": true // generate license
+  "license": false // generate license
 }
 ```
 
