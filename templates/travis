@@ -15,3 +15,9 @@ script:
   - npm run ci
 after_script:
   - npminstall codecov && codecov
+{%- if services %}
+services:
+  {%- for service in services %}
+  - {{service}}
+  {%- endfor %}
+{%- endif %}

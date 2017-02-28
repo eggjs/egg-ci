@@ -39,6 +39,7 @@ const config = Object.assign({
 }, pkg.ci);
 config.types = arrayify(config.type);
 config.versions = arrayify(config.version);
+if (config.services) config.services = arrayify(config.services);
 if (config.versions.length === 0) {
   const installNode = pkg.engines && (pkg.engines['install-node'] ||
     pkg.engines['install-alinode']);
