@@ -1,4 +1,10 @@
 
+1.3.0 / 2017-03-01
+==================
+
+  * fix: don't generate LICENSE by default (#10)
+  * feat: support services (#9)
+
 1.2.0 / 2017-02-26
 ==================
 
