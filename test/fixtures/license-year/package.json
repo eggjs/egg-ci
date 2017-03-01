@@ -1,0 +1,9 @@
+{
+  "name": "license",
+  "ci": {
+    "license": {
+      "year": "2014",
+      "fullname": "egg-ci"
+    }
+  }
+}
