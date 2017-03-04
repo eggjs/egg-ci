@@ -130,8 +130,14 @@ test('generate LICENSE with object', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license-object') });
   execSync(cmd, { env });
   const file = fs.readFileSync(getRoot('license-object/LICENSE'), 'utf8');
-  const year = new Date().getFullYear();
-  t.regex(file, new RegExp(`${year} egg-ci`));
+  t.regex(file, /2017 egg-ci/);
+});
+
+test('generate LICENSE with year', t => {
+  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license-year') });
+  execSync(cmd, { env });
+  const file = fs.readFileSync(getRoot('license-year/LICENSE'), 'utf8');
+  t.regex(file, new RegExp(/2014-present egg-ci/));
 });
 
 test('generate service with string', t => {

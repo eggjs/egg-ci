@@ -81,11 +81,14 @@ for (const type of config.types) {
 
 if (config.license) {
   let data = {
-    year: new Date().getFullYear(),
+    year: '2017',
     fullname: 'Alibaba Group Holding Limited and other contributors.',
   };
   if (typeof config.license === 'object') {
     data = Object.assign(data, config.license);
+  }
+  if (Number(data.year) < new Date().getFullYear()) {
+    data.year = `${data.year}-present`;
   }
   const licenseContent = engine.renderString(getTpl('license'), data);
   const licensePath = path.join(root, 'LICENSE');
