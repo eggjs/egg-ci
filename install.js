@@ -49,6 +49,18 @@ if (config.versions.length === 0) {
   }
 }
 
+const originCommand = config.command;
+if (typeof originCommand === 'string') {
+  config.command = {
+    travis: originCommand,
+    appveyor: originCommand,
+  };
+}
+config.command = Object.assign({
+  travis: 'ci',
+  appveyor: 'ci',
+}, config.command);
+
 let ymlName = '';
 let ymlContent = '';
 
