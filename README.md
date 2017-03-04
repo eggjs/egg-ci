@@ -35,7 +35,8 @@ Add `ci` property to your `package.json`:
   "type": "travis, appveyor", // default ci env type is 'travis, appveyor'
   "npminstall": true, // use `npminstall` or `npm install`, default is true
   "version": "6", // test LTS node version by default
-  "command": "ci", // npm ci command, default is `npm run ci`,
+  "command": "ci", // npm ci command, default is `npm run ci`, can use `{ "travis": "ci", "appveyor": "test" }` to special diffrence command.
+  "services": "redis-server, mysql", // custom service
   "license": false // generate license
 }
 ```

@@ -1,0 +1,9 @@
+{
+  "name": "service",
+  "ci": {
+    "command": {
+      "travis": "ci-travis",
+      "appveyor": "ci-appveyor"
+    }
+  }
+}
