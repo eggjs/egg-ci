@@ -49,6 +49,18 @@ if (config.versions.length === 0) {
   }
 }
 
+const originCommand = config.command;
+if (typeof originCommand === 'string') {
+  config.command = {
+    travis: originCommand,
+    appveyor: originCommand,
+  };
+}
+config.command = Object.assign({
+  travis: 'ci',
+  appveyor: 'ci',
+}, config.command);
+
 let ymlName = '';
 let ymlContent = '';
 
@@ -69,11 +81,14 @@ for (const type of config.types) {
 
 if (config.license) {
   let data = {
-    year: new Date().getFullYear(),
+    year: '2017',
     fullname: 'Alibaba Group Holding Limited and other contributors.',
   };
   if (typeof config.license === 'object') {
     data = Object.assign(data, config.license);
+  }
+  if (Number(data.year) < new Date().getFullYear()) {
+    data.year = `${data.year}-present`;
   }
   const licenseContent = engine.renderString(getTpl('license'), data);
   const licensePath = path.join(root, 'LICENSE');

@@ -12,7 +12,7 @@ install:
   - npm i npminstall && npminstall
 {%- endif %}
 script:
-  - npm run ci
+  - npm run {{command.travis}}
 after_script:
   - npminstall codecov && codecov
 {%- if services %}

@@ -93,6 +93,17 @@ test('default on install-node-with-versions and ci.versions', t => {
   t.regex(appveyoryml, /\- nodejs_version: '5'/);
 });
 
+test('support custom ci', t => {
+  const env = Object.assign({}, process.env, {
+    CI_ROOT_FOR_TEST: getRoot('ci'),
+  });
+  execSync(cmd, { env });
+  const yml = fs.readFileSync(getYml('ci', '.travis.yml'), 'utf8');
+  t.regex(yml, /\- npm run ci-travis/);
+  const appveyoryml = fs.readFileSync(getYml('ci', 'appveyor.yml'), 'utf8');
+  t.regex(appveyoryml, /\- npm run ci-appveyor/);
+});
+
 test('no package.json', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('no-pkg') });
   execSync(cmd, { env });
@@ -119,8 +130,14 @@ test('generate LICENSE with object', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license-object') });
   execSync(cmd, { env });
   const file = fs.readFileSync(getRoot('license-object/LICENSE'), 'utf8');
-  const year = new Date().getFullYear();
-  t.regex(file, new RegExp(`${year} egg-ci`));
+  t.regex(file, /2017 egg-ci/);
+});
+
+test('generate LICENSE with year', t => {
+  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license-year') });
+  execSync(cmd, { env });
+  const file = fs.readFileSync(getRoot('license-year/LICENSE'), 'utf8');
+  t.regex(file, new RegExp(/2014-present egg-ci/));
 });
 
 test('generate service with string', t => {
