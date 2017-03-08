@@ -8,6 +8,16 @@ environment:
   {%- endfor %}
 
 install:
+  {%- if services %}
+    {%- for service in services %}
+      {%- if service == 'redis-server' %}
+  - nuget install redis-64 -excludeversion
+  - redis-64\tools\redis-server.exe --service-install
+  - redis-64\tools\redis-server.exe --service-start
+  - '@ECHO Redis Started'
+      {%- endif %}
+    {%- endfor %}
+  {%- endif %}
   - ps: Install-Product node $env:nodejs_version
   {%- if npminstall %}
   - npm i npminstall && node_modules\.bin\npminstall
@@ -21,3 +31,10 @@ test_script:
   - npm run ci
 
 build: off
+
+{%- if services %}
+services:
+  {%- for service in services %}
+  - {{service}}
+  {%- endfor %}
+{%- endif %}
