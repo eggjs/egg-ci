@@ -18,32 +18,32 @@ egg-ci
 [download-image]: https://img.shields.io/npm/dm/egg-ci.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-ci
 
-Auto gen ci config file.
+自动生成持续集成配置文件
 
-## Installation
+## 安装
 
 ```bash
 $ npm i egg-ci --save-dev
 ```
 
-## Usage
+## 用法
 
-Add `ci` property to your `package.json`:
+在 `package.json` 中添加如下配置：
 
 ```js
 "ci": {
-  "type": "travis, appveyor", // default ci env type is 'travis, appveyor'
-  "npminstall": true, // use `npminstall` or `npm install`, default is true
-  "version": "6", // test LTS node version by default
-  "command": "ci", // npm ci command, default is `npm run ci`, can use `{ "travis": "ci", "appveyor": "test" }` to special diffrence command.
-  "services": "redis-server, mysql", // custom service
-  "license": false // generate license
+  "type": "travis, appveyor", // 默认的集成环境是 'travis, appveyor'
+  "npminstall": true, // 是否使用 `npminstall`, 默认为true
+  "version": "6", // 指定 Node 版本。 默认为 LTS 版本。
+  "command": "ci", // npm ci command, 默认是 `npm run ci`, 能够使用 `{ "travis": "ci", "appveyor": "test" }` 来指定不同的 command.
+  "services": "redis-server, mysql", // 自定义服务配置
+  "license": false // 生成 license
 }
 ```
 
-## How
+## 原理
 
-Use `npm postinstall` hoook to create the `*.yml` after each `npm install` run.
+利用了 `npm postinstall` 的钩子，在每次执行 `npm install` 时生成 `*.yml` 配置文件。
 
 ## License
 
