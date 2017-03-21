@@ -143,10 +143,15 @@ test('generate LICENSE with year', t => {
 test('generate service with string', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('service') });
   execSync(cmd, { env, stdout: [ 0, 1, 2 ] });
-  const file = fs.readFileSync(getRoot('service/.travis.yml'), 'utf8');
+  let file = fs.readFileSync(getRoot('service/.travis.yml'), 'utf8');
   t.regex(file, /services/);
   t.regex(file, /- redis-server/);
   t.regex(file, /- mysql/);
+  file = fs.readFileSync(getRoot('service/appveyor.yml'), 'utf8');
+  t.regex(file, /services/);
+  t.regex(file, /- redis-server/);
+  t.regex(file, /- mysql/);
+  t.regex(file, /redis-server.exe/);
 });
 
 function getRoot(name) {
