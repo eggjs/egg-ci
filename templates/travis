@@ -13,8 +13,9 @@ install:
 {%- endif %}
 script:
   - npm run {{command.travis}}
-after_script:
-  - npminstall codecov && codecov
+{%- if afterScript %}
+{{afterScript}}
+{%- endif %}
 {%- if services %}
 services:
   {%- for service in services %}

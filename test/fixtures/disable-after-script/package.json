@@ -1,0 +1,6 @@
+{
+  "name": "disable-after-script",
+  "ci": {
+    "afterScript": false
+  }
+}
