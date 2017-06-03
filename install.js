@@ -30,12 +30,18 @@ try {
   process.exit(0);
 }
 
+const defaultAfterScript = `
+after_script:
+  - npminstall codecov && codecov
+`.trim();
+
 const config = Object.assign({
   type: 'travis, appveyor', // default is travis and appveyor
   version: '',
   npminstall: true,
   command: 'ci',
   license: false,
+  afterScript: defaultAfterScript,
 }, pkg.ci);
 config.types = arrayify(config.type);
 config.versions = arrayify(config.version);

@@ -28,6 +28,7 @@ test('travis and npminstall = false', t => {
   t.regex(yml, /\- '2'/);
   t.regex(yml, /\- '4'/);
   t.regex(yml, /\- '5'/);
+  t.regex(yml, /after_script:/);
   t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
   t.falsy(fs.existsSync(getYml('travis', 'LICENSE')));
 });
@@ -152,6 +153,13 @@ test('generate service with string', t => {
   t.regex(file, /- redis-server/);
   t.regex(file, /- mysql/);
   t.regex(file, /redis-server.exe/);
+});
+
+test('generate without after_script', t => {
+  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('disable-after-script') });
+  execSync(cmd, { env, stdout: [ 0, 1, 2 ] });
+  const file = fs.readFileSync(getRoot('disable-after-script/.travis.yml'), 'utf8');
+  t.falsy(/after_script:/.test(file));
 });
 
 function getRoot(name) {
