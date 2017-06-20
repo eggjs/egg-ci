@@ -39,7 +39,10 @@ const config = Object.assign({
   type: 'travis, appveyor', // default is travis and appveyor
   version: '',
   npminstall: true,
-  command: 'ci',
+  command: {
+    travis: 'ci',
+    appveyor: 'test',
+  },
   license: false,
   afterScript: defaultAfterScript,
 }, pkg.ci);
@@ -64,7 +67,7 @@ if (typeof originCommand === 'string') {
 }
 config.command = Object.assign({
   travis: 'ci',
-  appveyor: 'ci',
+  appveyor: 'test',
 }, config.command);
 
 let ymlName = '';
