@@ -28,13 +28,16 @@
     "type": "git",
     "url": "https://github.com/eggjs/egg-ci.git"
   },
+  "bug": {
+    "url": "https://github.com/eggjs/egg/issues"
+  },
   "license": "MIT",
   "dependencies": {
-    "nunjucks": "^3.0.0"
+    "nunjucks": "^3.0.1"
   },
   "devDependencies": {
     "autod": "2",
-    "ava": "^0.16.0",
+    "ava": "^0.19.1",
     "eslint": "3",
     "eslint-config-egg": "3",
     "nyc": "10",

@@ -50,9 +50,11 @@ test('default', t => {
   const yml = fs.readFileSync(getYml('default', '.travis.yml'), 'utf8');
   t.regex(yml, /\- npm i npminstall && npminstall/);
   t.regex(yml, /\- '6'/);
+  t.regex(yml, /\- npm run ci/);
   const appveyoryml = fs.readFileSync(getYml('default', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
   t.regex(appveyoryml, /\- nodejs_version: '6'/);
+  t.regex(appveyoryml, /\- npm run test/);
 });
 
 test('default on install-node', t => {
