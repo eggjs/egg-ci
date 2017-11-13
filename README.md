@@ -47,7 +47,7 @@ Add `ci` property to your `package.json`:
 
 ## How
 
-Use `npm postinstall` hoook to create the `*.yml` after each `npm install` run.
+Use `npm postinstall` hook to create the `*.yml` after each `npm install` run.
 
 ## License
 
