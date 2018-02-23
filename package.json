@@ -33,15 +33,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "nunjucks": "^3.0.1"
+    "nunjucks": "^3.1.0"
   },
   "devDependencies": {
     "autod": "2",
-    "ava": "^0.19.1",
+    "ava": "^0.25.0",
     "eslint": "3",
     "eslint-config-egg": "3",
     "nyc": "10",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.2"
   },
   "engine": {
     "node": ">=4.0.0"
