@@ -125,15 +125,14 @@ test('generate LICENSE', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license') });
   execSync(cmd, { env });
   const file = fs.readFileSync(getRoot('license/LICENSE'), 'utf8');
-  const year = new Date().getFullYear();
-  t.regex(file, new RegExp(`${year} Alibaba Group Holding Limited and other contributors.`));
+  t.regex(file, new RegExp('2017-present Alibaba Group Holding Limited and other contributors.'));
 });
 
 test('generate LICENSE with object', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license-object') });
   execSync(cmd, { env });
   const file = fs.readFileSync(getRoot('license-object/LICENSE'), 'utf8');
-  t.regex(file, /2017 egg-ci/);
+  t.regex(file, /2017-present egg-ci/);
 });
 
 test('generate LICENSE with year', t => {
