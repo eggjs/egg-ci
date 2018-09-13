@@ -64,7 +64,7 @@ if (config.versions.length === 0) {
   }
 }
 
-if (pkg.ci.os) {
+if (pkg.ci && pkg.ci.os) {
   config.os = Object.assign({}, config.os, pkg.ci.os);
 }
 for (const platfrom in config.os) {
