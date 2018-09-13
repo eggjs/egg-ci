@@ -33,7 +33,8 @@ $ npm i egg-ci --save-dev
 ```js
 "ci": {
   "type": "travis, appveyor", // 默认的集成环境是 'travis, appveyor'
-  "npminstall": true, // 是否使用 `npminstall`, 默认为true
+  "os": "", // travis 环境支持 'linux' 和 'osx' 两种操作系统，默认是 ''
+  "npminstall": true, // 是否使用 `npminstall`, 默认为 true
   "version": "6", // 指定 Node 版本。 默认为 LTS 版本。
   // npm ci command
   "command": {

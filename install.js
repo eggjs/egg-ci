@@ -37,6 +37,7 @@ after_script:
 
 const config = Object.assign({
   type: 'travis, appveyor', // default is travis and appveyor
+  os: '',
   version: '',
   npminstall: true,
   command: {
@@ -48,6 +49,7 @@ const config = Object.assign({
 }, pkg.ci);
 config.types = arrayify(config.type);
 config.versions = arrayify(config.version);
+config.os = arrayify(config.os);
 if (config.services) config.services = arrayify(config.services);
 if (config.versions.length === 0) {
   const installNode = pkg.engines && (pkg.engines['install-node'] ||
@@ -57,6 +59,7 @@ if (config.versions.length === 0) {
     config.versions = [ '6' ];
   }
 }
+if (config.os.length === 0) config.os = '';
 
 const originCommand = config.command;
 if (typeof originCommand === 'string') {
