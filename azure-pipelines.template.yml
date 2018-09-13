@@ -14,9 +14,7 @@ jobs:
       versionSpec: ${{ parameters.node_version }}
     displayName: 'Install Node.js'
 
-  - script: |
-      ${{ parameters.install_script }}
+  - script: ${{ parameters.install_script }}
     displayName: 'Install Packages'
-  - script: |
-      ${{ parameters.test_script }}
+  - script: ${{ parameters.test_script }}
     displayName: 'Build & Unit Test'
