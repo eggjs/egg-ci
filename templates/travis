@@ -1,11 +1,17 @@
 sudo: false
+{%- if os %}
+os:
+  {%- for name in os %}
+  - {{name}}
+  {%- endfor %}
+{%- endif %}
 language: node_js
 node_js:
 {%- for version in versions %}
   - '{{version}}'
 {%- else %}
   - '6'
-  - '7'
+  - '8'
 {%- endfor %}
 {%- if npminstall %}
 install:
