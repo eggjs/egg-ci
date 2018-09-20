@@ -29,6 +29,7 @@ test('travis and npminstall = false', t => {
   t.regex(yml, /\- '4'/);
   t.regex(yml, /\- '5'/);
   t.regex(yml, /after_script:/);
+  t.notRegex(yml, /os:/);
   t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
   t.falsy(fs.existsSync(getYml('travis', 'LICENSE')));
 });
