@@ -29,8 +29,26 @@ test('travis and npminstall = false', t => {
   t.regex(yml, /\- '4'/);
   t.regex(yml, /\- '5'/);
   t.regex(yml, /after_script:/);
+  t.notRegex(yml, /os:/);
   t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
   t.falsy(fs.existsSync(getYml('travis', 'LICENSE')));
+});
+
+test('travis with os: linux and osx', t => {
+  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('travis-os') });
+  execSync(cmd, { env });
+  const yml = fs.readFileSync(getYml('travis-os', '.travis.yml'), 'utf8');
+  t.regex(yml, /\- '1'/);
+  t.regex(yml, /\- '2'/);
+  t.regex(yml, /\- '4'/);
+  t.regex(yml, /\- '5'/);
+  t.regex(yml, /os:/);
+  t.regex(yml, / - linux/);
+  t.regex(yml, / - osx/);
+  t.regex(yml, /after_script:/);
+  t.regex(yml, /- npm i npminstall && npminstall/);
+  t.falsy(fs.existsSync(getYml('travis-os', 'appveyor.yml')));
+  t.falsy(fs.existsSync(getYml('travis-os', 'LICENSE')));
 });
 
 test('travis and versions in array', t => {
@@ -55,6 +73,21 @@ test('default', t => {
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
   t.regex(appveyoryml, /\- nodejs_version: '6'/);
   t.regex(appveyoryml, /\- npm run test/);
+});
+
+test('azure-pipelines', t => {
+  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('azure-pipelines') });
+  execSync(cmd, { env });
+  const yml = fs.readFileSync(getYml('azure-pipelines', 'azure-pipelines.yml'), 'utf8');
+  t.regex(yml, /install_script: 'npm i -g npminstall && npminstall'/);
+  t.regex(yml, /win_node_4/);
+  t.regex(yml, /win_node_6/);
+  t.regex(yml, /win_node_8/);
+  t.regex(yml, /win_node_10/);
+  t.regex(yml, /macos_node_4/);
+  t.regex(yml, /macos_node_6/);
+  t.regex(yml, /macos_node_8/);
+  t.regex(yml, /macos_node_10/);
 });
 
 test('default on install-node', t => {
