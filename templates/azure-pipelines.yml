@@ -1,0 +1,24 @@
+jobs:
+{%- for name in os['azure-pipelines'] %}
+{%- for version in versions %}
+- template: azure-pipelines.template.yml
+  parameters:
+    {%- if name === 'linux' %}
+    name: linux_node_{{version}}
+    vmImage: 'ubuntu-16.04'
+    {%- elif name === 'macos' %}
+    name: macos_node_{{version}}
+    vmImage: 'xcode9-macos10.13'
+    {%- else %}
+    name: win_node_{{version}}
+    vmImage: 'vs2017-win2016'
+    {%- endif %}
+    node_version: {{version}}
+    {%- if npminstall %}
+    install_script: 'npm i -g npminstall && npminstall'
+    {%- else %}
+    install_script: 'npm i'
+    {%- endif %}
+    test_script: 'npm run {{command['azure-pipelines']}}'
+{% endfor %}
+{%- endfor %}

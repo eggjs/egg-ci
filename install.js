@@ -37,15 +37,21 @@ after_script:
 
 const config = Object.assign({
   type: 'travis, appveyor', // default is travis and appveyor
+  os: {
+    travis: '',
+    'azure-pipelines': 'windows, macos',
+  },
   version: '',
   npminstall: true,
   command: {
     travis: 'ci',
     appveyor: 'test',
+    'azure-pipelines': 'ci',
   },
   license: false,
   afterScript: defaultAfterScript,
 }, pkg.ci);
+
 config.types = arrayify(config.type);
 config.versions = arrayify(config.version);
 if (config.services) config.services = arrayify(config.services);
@@ -58,6 +64,13 @@ if (config.versions.length === 0) {
   }
 }
 
+if (pkg.ci && pkg.ci.os) {
+  config.os = Object.assign({}, config.os, pkg.ci.os);
+}
+for (const platfrom in config.os) {
+  config.os[platfrom] = arrayify(config.os[platfrom]);
+}
+
 const originCommand = config.command;
 if (typeof originCommand === 'string') {
   config.command = {
@@ -68,10 +81,13 @@ if (typeof originCommand === 'string') {
 config.command = Object.assign({
   travis: 'ci',
   appveyor: 'test',
+  'azure-pipelines': 'test',
 }, config.command);
 
 let ymlName = '';
 let ymlContent = '';
+let ymlName2 = '';
+let ymlContent2 = '';
 
 for (const type of config.types) {
   if (type === 'travis') {
@@ -80,12 +96,22 @@ for (const type of config.types) {
   } else if (type === 'appveyor') {
     ymlContent = engine.renderString(getTpl('appveyor'), config);
     ymlName = 'appveyor.yml';
+  } else if (type === 'azure-pipelines') {
+    ymlContent = engine.renderString(getTpl('azure-pipelines.yml'), config);
+    ymlName = 'azure-pipelines.yml';
+    ymlContent2 = getTpl('azure-pipelines.template.yml');
+    ymlName2 = 'azure-pipelines.template.yml';
   } else {
     throw new Error(`${type} type not support`);
   }
   const ymlPath = path.join(root, ymlName);
   fs.writeFileSync(ymlPath, ymlContent);
   console.log(`[egg-ci] create ${ymlPath} success`);
+  if (ymlName2) {
+    const ymlPath2 = path.join(root, ymlName2);
+    fs.writeFileSync(ymlPath2, ymlContent2);
+    console.log(`[egg-ci] create ${ymlPath2} success`);
+  }
 }
 
 if (config.license) {
