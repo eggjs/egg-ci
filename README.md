@@ -43,7 +43,7 @@ Add `ci` property to your `package.json`:
   "command": {
     "travis": "ci",
     "appveyor": "test",
-    "azure-pipelines": "test"
+    "azure-pipelines": "ci"
   },
   "services": "redis-server, mysql", // custom service
   "license": false // generate license

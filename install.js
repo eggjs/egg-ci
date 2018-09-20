@@ -46,7 +46,7 @@ const config = Object.assign({
   command: {
     travis: 'ci',
     appveyor: 'test',
-    'azure-pipelines': 'test',
+    'azure-pipelines': 'ci',
   },
   license: false,
   afterScript: defaultAfterScript,

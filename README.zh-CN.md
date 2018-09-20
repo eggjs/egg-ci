@@ -42,7 +42,8 @@ $ npm i egg-ci --save-dev
   // npm ci command
   "command": {
     "travis": "ci",
-    "appveyor": "test"
+    "appveyor": "test",
+    "azure-pipelines": "ci"
   },
   "services": "redis-server, mysql", // 自定义服务配置
   "license": false // 生成 license
