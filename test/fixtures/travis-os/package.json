@@ -1,0 +1,14 @@
+{
+  "name": "egg-ci",
+  "version": "1.0.0",
+  "scripts": {
+    "ci": "npm run cov"
+  },
+  "ci": {
+    "type": "travis",
+    "os": {
+      "travis": "linux, osx"
+    },
+    "version": "1, 2, 4, 5"
+  }
+}
