@@ -1,4 +1,10 @@
 
+1.9.1 / 2018-09-20
+==================
+
+**fixes**
+  * [[`7b63dcb`](http://github.com/eggjs/egg-ci/commit/7b63dcb3f4b85d00311a1feae4bf66d72465bc90)] - fix: don't set os when os.travis not set (#21) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.9.0 / 2018-09-20
 ==================
 
