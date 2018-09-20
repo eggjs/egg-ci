@@ -1,5 +1,5 @@
 sudo: false
-{%- if os.travis > 0 %}
+{%- if os.travis %}
 os:
   {%- for name in os.travis %}
   - {{name}}
