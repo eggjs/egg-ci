@@ -70,6 +70,9 @@ if (pkg.ci && pkg.ci.os) {
 for (const platfrom in config.os) {
   config.os[platfrom] = arrayify(config.os[platfrom]);
 }
+if (config.os && config.os.travis && config.os.travis.length === 0) {
+  config.os.travis = null;
+}
 
 const originCommand = config.command;
 if (typeof originCommand === 'string') {
