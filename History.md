@@ -1,4 +1,14 @@
 
+1.9.0 / 2018-09-20
+==================
+
+**features**
+  * [[`389a41c`](http://github.com/eggjs/egg-ci/commit/389a41ce840bf27569572f121ee1fc0293cbd517)] - feat: support multi os and add azure-pipelines (#20) (azure-pipelines[bot] <<azure-pipelines[bot]@users.noreply.github.com>>)
+
+**others**
+  * [[`52c6498`](http://github.com/eggjs/egg-ci/commit/52c6498de9db0f4e8fbcbedfe40463df9e8b4245)] - test: Happy New Year (#18) (Haoliang Gao <<sakura9515@gmail.com>>)
+  * [[`f925ace`](http://github.com/eggjs/egg-ci/commit/f925ace5520eace5031e8e14ed1f8eee0d67ef95)] - docs: hoook -> hook (#17) (zhennann <<zhen.nann@icloud.com>>)
+
 1.8.0 / 2017-06-20
 ==================
 
