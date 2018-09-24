@@ -1,4 +1,11 @@
 
+1.9.2 / 2018-09-25
+==================
+
+**fixes**
+  * [[`201a5dd`](http://github.com/eggjs/egg-ci/commit/201a5dd8f259c5078ee26bc31416c1c3b3858bb7)] - fix: add linux by default on azure-pipelines (#23) (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`a1f14f2`](http://github.com/eggjs/egg-ci/commit/a1f14f2d5220ba07b7509849e87ebf619581ff2f)] - fix: add report coverage script on azure pipelines (#22) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.9.1 / 2018-09-20
 ==================
 
