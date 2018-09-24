@@ -6,11 +6,11 @@ jobs:
 
 - template: azure-pipelines.template.yml
   parameters:
-    name: macos
-    vmImage: 'xcode9-macos10.13'
+    name: windows
+    vmImage: 'vs2017-win2016'
 
 - template: azure-pipelines.template.yml
   parameters:
-    name: windows
-    vmImage: 'vs2017-win2016'
+    name: macos
+    vmImage: 'xcode9-macos10.13'
 
