@@ -39,7 +39,7 @@ const config = Object.assign({
   type: 'travis, appveyor', // default is travis and appveyor
   os: {
     travis: '',
-    'azure-pipelines': 'windows, macos',
+    'azure-pipelines': 'linux, windows, macos',
   },
   version: '',
   npminstall: true,

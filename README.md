@@ -35,8 +35,8 @@ Add `ci` property to your `package.json`:
 "ci": {
   "type": "travis, appveyor", // default ci env type is 'travis, appveyor', also support 'azure-pipelines'
   "os": {
-    "travis": "", // travis support 'linux' and 'osx' operation system, default is ''
-    "azure-pipelines": "windows, macos" // azure-pipelines support 'linux, macos, windows', default is 'windows, macos'
+    "travis": "linux", // travis support 'linux' and 'osx' operation system, default is 'linux'
+    "azure-pipelines": "linux, windows, macos" // azure-pipelines support 'linux, windows, macos', default is 'linux, windows, macos'
   },
   "npminstall": true, // use `npminstall` or `npm install`, default is true
   "version": "6", // test LTS node version by default
