@@ -102,7 +102,7 @@ for (const type of config.types) {
   } else if (type === 'azure-pipelines') {
     ymlContent = engine.renderString(getTpl('azure-pipelines.yml'), config);
     ymlName = 'azure-pipelines.yml';
-    ymlContent2 = getTpl('azure-pipelines.template.yml');
+    ymlContent2 = engine.renderString(getTpl('azure-pipelines.template.yml'), config);
     ymlName2 = 'azure-pipelines.template.yml';
   } else {
     throw new Error(`${type} type not support`);

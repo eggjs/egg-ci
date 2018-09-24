@@ -79,15 +79,18 @@ test('azure-pipelines', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('azure-pipelines') });
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('azure-pipelines', 'azure-pipelines.yml'), 'utf8');
-  t.regex(yml, /install_script: 'npm i -g npminstall && npminstall'/);
-  t.regex(yml, /win_node_4/);
-  t.regex(yml, /win_node_6/);
-  t.regex(yml, /win_node_8/);
-  t.regex(yml, /win_node_10/);
-  t.regex(yml, /macos_node_4/);
-  t.regex(yml, /macos_node_6/);
-  t.regex(yml, /macos_node_8/);
-  t.regex(yml, /macos_node_10/);
+  const ymlTpl = fs.readFileSync(getYml('azure-pipelines', 'azure-pipelines.template.yml'), 'utf8');
+  t.regex(ymlTpl, /npm i npminstall && npminstall/);
+  t.regex(ymlTpl, /node_4/);
+  t.regex(ymlTpl, /node_version: 4/);
+  t.regex(ymlTpl, /node_6/);
+  t.regex(ymlTpl, /node_version: 6/);
+  t.regex(ymlTpl, /node_8/);
+  t.regex(ymlTpl, /node_version: 8/);
+  t.regex(ymlTpl, /node_10/);
+  t.regex(ymlTpl, /node_version: 10/);
+  t.regex(yml, /name: windows/);
+  t.regex(yml, /name: macos/);
 });
 
 test('default on install-node', t => {

@@ -3,6 +3,7 @@ egg-ci
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
+[![Build Status](https://dev.azure.com/eggjs/egg/_apis/build/status/eggjs.egg-ci)](https://dev.azure.com/eggjs/egg/_build/latest?definitionId=3)
 [![Test coverage][codecov-image]][codecov-url]
 [![David deps][david-image]][david-url]
 [![npm download][download-image]][download-url]
