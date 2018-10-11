@@ -30,27 +30,28 @@ try {
   process.exit(0);
 }
 
-const defaultAfterScript = `
-after_script:
-  - npminstall codecov && codecov
-`.trim();
-
 const config = Object.assign({
   type: 'travis, appveyor', // default is travis and appveyor
-  os: {
-    travis: '',
-    'azure-pipelines': 'linux, windows, macos',
-  },
   version: '',
   npminstall: true,
-  command: {
-    travis: 'ci',
-    appveyor: 'test',
-    'azure-pipelines': 'ci',
-  },
+  // auto detect nyc_output/*.json files, please use on travis windows platfrom
+  nyc: false,
   license: false,
-  afterScript: defaultAfterScript,
 }, pkg.ci);
+if (!('afterScript' in config)) {
+  const codecovCMD = config.nyc ? 'codecov --disable=gcov -f .nyc_output/*.json' : 'codecov';
+  if (config.npminstall) {
+    config.afterScript = `
+after_script:
+  - npminstall codecov && ${codecovCMD}
+`.trim();
+  } else {
+    config.afterScript = `
+after_script:
+  - npm i codecov && ${codecovCMD}
+`.trim();
+  }
+}
 
 config.types = arrayify(config.type);
 config.versions = arrayify(config.version);
@@ -64,8 +65,15 @@ if (config.versions.length === 0) {
   }
 }
 
+const defaultOS = {
+  travis: '',
+  'azure-pipelines': 'linux, windows, macos',
+};
+
 if (pkg.ci && pkg.ci.os) {
-  config.os = Object.assign({}, config.os, pkg.ci.os);
+  config.os = Object.assign(defaultOS, pkg.ci.os);
+} else {
+  config.os = defaultOS;
 }
 for (const platfrom in config.os) {
   config.os[platfrom] = arrayify(config.os[platfrom]);
