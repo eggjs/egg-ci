@@ -29,6 +29,7 @@ test('travis and npminstall = false', t => {
   t.regex(yml, /\- '4'/);
   t.regex(yml, /\- '5'/);
   t.regex(yml, /after_script:/);
+  t.regex(yml, /\- npm i codecov && codecov/);
   t.notRegex(yml, /os:/);
   t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
   t.falsy(fs.existsSync(getYml('travis', 'LICENSE')));
@@ -69,10 +70,21 @@ test('default', t => {
   t.regex(yml, /\- npm i npminstall && npminstall/);
   t.regex(yml, /\- '6'/);
   t.regex(yml, /\- npm run ci/);
+  t.regex(yml, /\- npminstall codecov && codecov/);
   const appveyoryml = fs.readFileSync(getYml('default', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
   t.regex(appveyoryml, /\- nodejs_version: '6'/);
   t.regex(appveyoryml, /\- npm run test/);
+});
+
+test('nyc = true', t => {
+  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('nyc-true') });
+  execSync(cmd, { env });
+  const yml = fs.readFileSync(getYml('nyc-true', '.travis.yml'), 'utf8');
+  t.regex(yml, /\- npm i npminstall && npminstall/);
+  t.regex(yml, /\- '6'/);
+  t.regex(yml, /\- npm run ci/);
+  t.regex(yml, /\- npminstall codecov && codecov --disable=gcov -f \.nyc_output\/\*\.json/);
 });
 
 test('azure-pipelines', t => {
