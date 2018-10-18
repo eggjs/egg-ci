@@ -1,4 +1,10 @@
 
+1.10.0 / 2018-10-19
+==================
+
+**others**
+  * [[`b222662`](http://github.com/eggjs/egg-ci/commit/b222662d0f16009313fd140cd7b6575f628c9543)] - test: travis ci support windows now (#24) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.9.2 / 2018-09-25
 ==================
 
