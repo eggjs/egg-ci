@@ -92,7 +92,7 @@ if (typeof originCommand === 'string') {
 config.command = Object.assign({
   travis: 'ci',
   appveyor: 'test',
-  'azure-pipelines': 'test',
+  'azure-pipelines': 'ci',
 }, config.command);
 
 let ymlName = '';
