@@ -61,7 +61,7 @@ if (config.versions.length === 0) {
     pkg.engines['install-alinode']);
   if (!installNode) {
     // default version is LTS
-    config.versions = [ '6' ];
+    config.versions = [ '8, 10' ];
   }
 }
 
