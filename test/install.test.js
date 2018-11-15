@@ -68,12 +68,12 @@ test('default', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('default', '.travis.yml'), 'utf8');
   t.regex(yml, /\- npm i npminstall && npminstall/);
-  t.regex(yml, /\- '8, 10'/);
+  t.regex(yml, /\- '6, 8, 10'/);
   t.regex(yml, /\- npm run ci/);
   t.regex(yml, /\- npminstall codecov && codecov/);
   const appveyoryml = fs.readFileSync(getYml('default', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '8, 10'/);
+  t.regex(appveyoryml, /\- nodejs_version: '6, 8, 10'/);
   t.regex(appveyoryml, /\- npm run test/);
 });
 
@@ -82,7 +82,7 @@ test('nyc = true', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('nyc-true', '.travis.yml'), 'utf8');
   t.regex(yml, /\- npm i npminstall && npminstall/);
-  t.regex(yml, /\- '8, 10'/);
+  t.regex(yml, /\- '6, 8, 10'/);
   t.regex(yml, /\- npm run ci/);
   t.regex(yml, /\- npminstall codecov && codecov --disable=gcov -f \.nyc_output\/\*\.json/);
 });
