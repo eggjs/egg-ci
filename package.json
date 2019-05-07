@@ -54,7 +54,7 @@
   },
   "ci": {
     "type": "travis, azure-pipelines",
-    "version": "4, 6, 8, 10, 11",
+    "version": "4, 6, 8, 10, 12",
     "os": {
       "travis": "linux, osx, windows"
     },

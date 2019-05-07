@@ -19,7 +19,7 @@ jobs:
       node_10:
         node_version: 10
       node_11:
-        node_version: 11
+        node_version: 12
     maxParallel: 5
   steps:
   - task: NodeTool@0
@@ -42,6 +42,7 @@ jobs:
       displayName: Set ENV
 
   - script: |
+      npm -v
       npm i npminstall && npminstall
     displayName: 'Install Packages'
   - script: |
