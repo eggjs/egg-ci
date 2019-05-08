@@ -1,4 +1,10 @@
 
+1.12.0 / 2019-05-08
+==================
+
+**features**
+  * [[`a0e5824`](http://github.com/eggjs/egg-ci/commit/a0e5824284f86160041121b346f43a4030b5b37f)] - feat: add 12 to default (#27) (TZ | 天猪 <<atian25@qq.com>>)
+
 1.11.0 / 2018-12-18
 ===================
 
