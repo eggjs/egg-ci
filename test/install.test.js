@@ -46,8 +46,9 @@ test('travis with os: linux and osx', t => {
   t.regex(yml, /os:/);
   t.regex(yml, / - linux/);
   t.regex(yml, / - osx/);
+  t.regex(yml, /before_install:/);
+  t.regex(yml, /- npm i npminstall -g/);
   t.regex(yml, /after_script:/);
-  t.regex(yml, /- npm i npminstall && npminstall/);
   t.falsy(fs.existsSync(getYml('travis-os', 'appveyor.yml')));
   t.falsy(fs.existsSync(getYml('travis-os', 'LICENSE')));
 });
@@ -67,7 +68,8 @@ test('default', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('default') });
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('default', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- npm i npminstall && npminstall/);
+  t.regex(yml, /before_install:/);
+  t.regex(yml, /\- npm i npminstall -g/);
   t.regex(yml, /\- '8, 10, 12'/);
   t.regex(yml, /\- npm run ci/);
   t.regex(yml, /\- npminstall codecov && codecov/);
@@ -81,7 +83,8 @@ test('nyc = true', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('nyc-true') });
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('nyc-true', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- npm i npminstall && npminstall/);
+  t.regex(yml, /before_install:/);
+  t.regex(yml, /\- npm i npminstall -g/);
   t.regex(yml, /\- '8, 10, 12'/);
   t.regex(yml, /\- npm run ci/);
   t.regex(yml, /\- npminstall codecov && codecov --disable=gcov -f \.nyc_output\/\*\.json/);
@@ -109,7 +112,8 @@ test('default on install-node', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('install-node') });
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('install-node', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- npm i npminstall && npminstall/);
+  t.regex(yml, /before_install:/);
+  t.regex(yml, /\- npm i npminstall -g/);
   t.regex(yml, /\- '6'/);
   const appveyoryml = fs.readFileSync(getYml('install-node', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
@@ -120,7 +124,8 @@ test('default on install-alinode', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('install-alinode') });
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('install-alinode', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- npm i npminstall && npminstall/);
+  t.regex(yml, /before_install:/);
+  t.regex(yml, /\- npm i npminstall -g/);
   t.regex(yml, /\- '6'/);
   const appveyoryml = fs.readFileSync(getYml('install-alinode', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
@@ -133,7 +138,8 @@ test('default on install-node-with-versions and ci.versions', t => {
   });
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('install-node-with-versions', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- npm i npminstall && npminstall/);
+  t.regex(yml, /before_install:/);
+  t.regex(yml, /\- npm i npminstall -g/);
   t.regex(yml, /\- '0\.12'/);
   t.regex(yml, /\- '4'/);
   t.regex(yml, /\- '5'/);

@@ -14,8 +14,10 @@ node_js:
   - '8'
 {%- endfor %}
 {%- if npminstall %}
+before_install:
+  - npm i npminstall -g
 install:
-  - npm i npminstall && npminstall
+  - npminstall
 {%- endif %}
 script:
   - npm run {{command.travis}}
