@@ -1,4 +1,10 @@
 
+1.13.0 / 2019-07-23
+==================
+
+**features**
+  * [[`54eb41e`](http://github.com/eggjs/egg-ci/commit/54eb41eb18b0a88a4499699b84fe1b51862ef69a)] - feat: update travis config (#28) (Suyi <<thonatos.yang@gmail.com>>)
+
 1.12.0 / 2019-05-08
 ==================
 
