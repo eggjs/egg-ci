@@ -70,12 +70,16 @@ test('default', t => {
   const yml = fs.readFileSync(getYml('default', '.travis.yml'), 'utf8');
   t.regex(yml, /before_install:/);
   t.regex(yml, /\- npm i npminstall -g/);
-  t.regex(yml, /\- '8, 10, 12'/);
+  t.regex(yml, /\- '8'/);
+  t.regex(yml, /\- '10'/);
+  t.regex(yml, /\- '12'/);
   t.regex(yml, /\- npm run ci/);
   t.regex(yml, /\- npminstall codecov && codecov/);
   const appveyoryml = fs.readFileSync(getYml('default', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '8, 10, 12'/);
+  t.regex(appveyoryml, /\- nodejs_version: '8'/);
+  t.regex(appveyoryml, /\- nodejs_version: '10'/);
+  t.regex(appveyoryml, /\- nodejs_version: '12'/);
   t.regex(appveyoryml, /\- npm run test/);
 });
 
@@ -85,7 +89,9 @@ test('nyc = true', t => {
   const yml = fs.readFileSync(getYml('nyc-true', '.travis.yml'), 'utf8');
   t.regex(yml, /before_install:/);
   t.regex(yml, /\- npm i npminstall -g/);
-  t.regex(yml, /\- '8, 10, 12'/);
+  t.regex(yml, /\- '8'/);
+  t.regex(yml, /\- '10'/);
+  t.regex(yml, /\- '12'/);
   t.regex(yml, /\- npm run ci/);
   t.regex(yml, /\- npminstall codecov && codecov --disable=gcov -f \.nyc_output\/\*\.json/);
 });
