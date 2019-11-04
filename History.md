@@ -1,4 +1,10 @@
 
+1.13.1 / 2019-11-04
+==================
+
+**fixes**
+  * [[`17b5f07`](http://github.com/eggjs/egg-ci/commit/17b5f07d0af0d535a524e70df608d4851d870ab4)] - fix: multi version in .travis.yml (#29) (dxd <<dxd_sjtu@outlook.com>>)
+
 1.13.0 / 2019-07-23
 ==================
 
