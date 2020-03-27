@@ -1,4 +1,10 @@
 
+1.14.0 / 2020-03-27
+==================
+
+**features**
+  * [[`b8f5a14`](http://github.com/eggjs/egg-ci/commit/b8f5a141d1b429c72cace0bdcf29bb225879840e)] - feat: remove deprecated `sudo` on travis ci (#30) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.13.1 / 2019-11-04
 ==================
 
