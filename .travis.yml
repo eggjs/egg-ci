@@ -1,4 +1,3 @@
-sudo: false
 os:
   - linux
   - osx
@@ -10,6 +9,7 @@ node_js:
   - '8'
   - '10'
   - '12'
+  - '13'
 before_install:
   - npm i npminstall -g
 install:
@@ -17,5 +17,4 @@ install:
 script:
   - npm run ci
 after_script:
-  - npm i codecov -g
-  - codecov --disable=gcov -f .nyc_output/*.json
+  - npminstall codecov && codecov --disable=gcov -f .nyc_output/*.json
