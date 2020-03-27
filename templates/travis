@@ -1,5 +1,4 @@
-sudo: false
-{%- if os.travis %}
+{%- if os.travis -%}
 os:
   {%- for name in os.travis %}
   - {{name}}
