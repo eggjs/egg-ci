@@ -36,15 +36,17 @@ Add `ci` property to your `package.json`:
   "type": "travis, appveyor", // default ci env type is 'travis, appveyor', also support 'azure-pipelines'
   "os": {
     "travis": "linux", // travis support 'linux', 'osx' and 'windows' operation system, default is 'linux'
-    "azure-pipelines": "linux, windows, macos" // azure-pipelines support 'linux, windows, macos', default is 'linux, windows, macos'
+    "azure-pipelines": "linux, windows, macos", // azure-pipelines support 'linux, windows, macos', default is 'linux, windows, macos'
+    "github": "linux, windows, macos"
   },
   "npminstall": true, // use `npminstall` or `npm install`, default is true
-  "version": "6", // test LTS node version by default
+  "version": "8, 10, 12", // test LTS node version by default
   // npm ci command
   "command": {
     "travis": "ci",
     "appveyor": "test",
-    "azure-pipelines": "ci"
+    "azure-pipelines": "ci",
+    "github": "ci"
   },
   "services": "redis-server, mysql", // custom service
   "license": false // generate license

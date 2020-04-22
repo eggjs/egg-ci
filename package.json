@@ -45,7 +45,7 @@
     "rimraf": "^2.6.2"
   },
   "engine": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "ava": {
     "files": [
@@ -53,8 +53,8 @@
     ]
   },
   "ci": {
-    "type": "travis, azure-pipelines",
-    "version": "6, 8, 10, 12, 13",
+    "type": "travis, azure-pipelines, github",
+    "version": "6, 8, 10, 12, 14",
     "os": {
       "travis": "linux, osx, windows"
     },

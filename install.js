@@ -31,7 +31,7 @@ try {
 }
 
 const config = Object.assign({
-  type: 'travis, appveyor', // default is travis and appveyor
+  type: 'travis, appveyor, github', // default is travis, appveyor and github
   version: '',
   npminstall: true,
   // auto detect nyc_output/*.json files, please use on travis windows platfrom
@@ -68,6 +68,7 @@ if (config.versions.length === 0) {
 const defaultOS = {
   travis: '',
   'azure-pipelines': 'linux, windows, macos',
+  github: 'linux, windows, macos',
 };
 
 if (pkg.ci && pkg.ci.os) {
@@ -87,12 +88,15 @@ if (typeof originCommand === 'string') {
   config.command = {
     travis: originCommand,
     appveyor: originCommand,
+    github: originCommand,
+    'azure-pipelines': originCommand,
   };
 }
 config.command = Object.assign({
   travis: 'ci',
   appveyor: 'test',
   'azure-pipelines': 'ci',
+  github: 'ci',
 }, config.command);
 
 let ymlName = '';
@@ -107,6 +111,24 @@ for (const type of config.types) {
   } else if (type === 'appveyor') {
     ymlContent = engine.renderString(getTpl('appveyor'), config);
     ymlName = 'appveyor.yml';
+  } else if (type === 'github') {
+    const versions = config.versions.map(v => {
+      return /^\d+$/.test(v) ? `${v}.x` : `${v}`;
+    });
+    const os = config.os.github.map(name => {
+      if (name === 'linux') name = 'ubuntu';
+      return `${name}-latest`;
+    });
+    ymlContent = getTpl('github.yml')
+      .replace('{{github_node_version}}', versions.join(', '))
+      .replace('{{github_os}}', os.join(', '))
+      .replace('{{github_command_ci}}', config.command.github)
+      .replace('{{github_npm_install}}', config.npminstall ? 'npm i -g npminstall && npminstall' : 'npm i');
+    ymlName = '.github/workflows/nodejs.yml';
+    let dir = path.join(root, '.github');
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+    dir = path.join(root, '.github', 'workflows');
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
   } else if (type === 'azure-pipelines') {
     ymlContent = engine.renderString(getTpl('azure-pipelines.yml'), config);
     ymlName = 'azure-pipelines.yml';

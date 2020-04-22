@@ -18,8 +18,8 @@ jobs:
         node_version: 10
       node_12:
         node_version: 12
-      node_13:
-        node_version: 13
+      node_14:
+        node_version: 14
     maxParallel: 5
   steps:
   - task: NodeTool@0
