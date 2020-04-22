@@ -1,4 +1,10 @@
 
+1.15.0 / 2020-04-22
+==================
+
+**features**
+  * [[`2a64078`](http://github.com/eggjs/egg-ci/commit/2a64078f6ffd896507da813cb5e0892ce97e582f)] - feat: support github workflow (#31) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.14.0 / 2020-03-27
 ==================
 
