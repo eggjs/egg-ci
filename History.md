@@ -1,4 +1,10 @@
 
+1.16.0 / 2020-09-01
+==================
+
+**features**
+  * [[`7319b39`](http://github.com/eggjs/egg-ci/commit/7319b3939b210ed8177cb7529e4dfddb9544f061)] - feat: fail-fast: false (#33) (TZ | 天猪 <<atian25@qq.com>>)
+
 1.15.0 / 2020-04-22
 ==================
 
