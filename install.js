@@ -112,15 +112,12 @@ for (const type of config.types) {
     ymlContent = engine.renderString(getTpl('appveyor'), config);
     ymlName = 'appveyor.yml';
   } else if (type === 'github') {
-    const versions = config.versions.map(v => {
-      return /^\d+$/.test(v) ? `${v}.x` : `${v}`;
-    });
     const os = config.os.github.map(name => {
       if (name === 'linux') name = 'ubuntu';
       return `${name}-latest`;
     });
     ymlContent = getTpl('github.yml')
-      .replace('{{github_node_version}}', versions.join(', '))
+      .replace('{{github_node_version}}', config.versions.join(', '))
       .replace('{{github_os}}', os.join(', '))
       .replace('{{github_command_ci}}', config.command.github)
       .replace('{{github_npm_install}}', config.npminstall ? 'npm i -g npminstall && npminstall' : 'npm i');
