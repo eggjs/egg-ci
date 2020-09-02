@@ -1,4 +1,10 @@
 
+1.17.0 / 2020-09-02
+==================
+
+**features**
+  * [[`ef36219`](http://github.com/eggjs/egg-ci/commit/ef362198cf971680d19276d4ac35e4e5b3091dde)] - feat: github actions schedule on 2:00 (#34) (TZ | 天猪 <<atian25@qq.com>>)
+
 1.16.0 / 2020-09-01
 ==================
 
