@@ -22,12 +22,21 @@ jobs:
         os: [{{github_os}}]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout Git Source
+      uses: actions/checkout@v2
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: {{github_npm_install}}
-    - run: npm run {{github_command_ci}}
-      env:
-        CI: true
+
+    - name: Install Dependencies
+      run: {{github_npm_install}}
+
+    - name: Continuous Integration
+      run: npm run {{github_command_ci}}
+
+    - name: Code Coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
