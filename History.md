@@ -1,4 +1,10 @@
 
+1.18.0 / 2020-09-08
+==================
+
+**features**
+  * [[`a8ee6da`](http://github.com/eggjs/egg-ci/commit/a8ee6daee8c8407a8b6a95ff56b49464281469d9)] - feat: step name (#35) (TZ | 天猪 <<atian25@qq.com>>)
+
 1.17.0 / 2020-09-02
 ==================
 
