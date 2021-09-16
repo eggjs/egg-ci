@@ -32,14 +32,14 @@ $ npm i egg-ci --save-dev
 
 ```js
 "ci": {
-  "type": "travis, appveyor", // 默认的集成环境是 'travis, appveyor'，还支持 'azure-pipelines'
+  "type": "travis, appveyor", // 默认的集成环境是 'travis, appveyor'，还支持 'github, azure-pipelines'
   "os": {
     "travis": "", // 支持 'linux, osx, windows' 三种操作系统，默认是 'linux'
     "azure-pipelines": "linux, windows, macos", // 支持 'linux, windows, macos' 三种操作系统，默认是 'linux, windows, macos'
     "github": "linux, windows, macos"
   },
   "npminstall": true, // 是否使用 `npminstall`, 默认为 true
-  "version": "10, 12", // 指定 Node 版本。 默认为 LTS 版本。
+  "version": "12, 14, 16", // 指定 Node 版本。 默认为 LTS 版本。
   // npm ci command
   "command": {
     "travis": "ci",

@@ -33,14 +33,14 @@ Add `ci` property to your `package.json`:
 
 ```js
 "ci": {
-  "type": "travis, appveyor", // default ci env type is 'travis, appveyor', also support 'azure-pipelines'
+  "type": "github", // default ci env type is 'travis, appveyor', also support 'github, azure-pipelines'
   "os": {
     "travis": "linux", // travis support 'linux', 'osx' and 'windows' operation system, default is 'linux'
     "azure-pipelines": "linux, windows, macos", // azure-pipelines support 'linux, windows, macos', default is 'linux, windows, macos'
     "github": "linux, windows, macos"
   },
   "npminstall": true, // use `npminstall` or `npm install`, default is true
-  "version": "8, 10, 12", // test LTS node version by default
+  "version": "12, 14, 16", // test LTS node version by default
   // npm ci command
   "command": {
     "travis": "ci",
