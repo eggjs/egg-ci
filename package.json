@@ -54,7 +54,7 @@
   },
   "ci": {
     "type": "travis, github",
-    "version": "10, 12, 14",
+    "version": "10, 12, 14, 16",
     "os": {
       "travis": "linux, osx, windows"
     },
