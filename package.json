@@ -53,10 +53,10 @@
     ]
   },
   "ci": {
-    "type": "travis, github",
-    "version": "10, 12, 14",
+    "type": "github",
+    "version": "10, 12, 14, 16",
     "os": {
-      "travis": "linux, osx, windows"
+      "github": "linux, macos, windows"
     },
     "nyc": true,
     "license": {
