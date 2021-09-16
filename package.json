@@ -56,7 +56,7 @@
     "type": "github",
     "version": "10, 12, 14, 16",
     "os": {
-      "github": "linux, osx, windows"
+      "github": "linux, macos, windows"
     },
     "nyc": true,
     "license": {
