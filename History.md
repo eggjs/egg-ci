@@ -1,4 +1,13 @@
 
+1.19.0 / 2021-09-16
+==================
+
+**features**
+  * [[`31e0a8b`](http://github.com/eggjs/egg-ci/commit/31e0a8b45957b1c4cdec1d4905c6140803c3428a)] - feat: support main branch on github action (#36) (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`a8516e8`](http://github.com/eggjs/egg-ci/commit/a8516e822a5e086a72721447c749fb53d9c566ef)] - chore: add github type (fengmk2 <<fengmk2@gmail.com>>)
+
 1.18.0 / 2020-09-08
 ==================
 
