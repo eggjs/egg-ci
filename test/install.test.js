@@ -81,6 +81,19 @@ test('support custom os: ubuntu', () => {
   assert.match(yml, /os: \[ubuntu-latest, windows-latest]/);
 });
 
+test('support custom service', () => {
+  clean();
+
+  const env = Object.assign({}, process.env, {
+    CI_ROOT_FOR_TEST: getRoot('service'),
+  });
+  execSync(cmd, { env });
+  const yml = getYmlContent('service');
+  assert.match(yml, /- name: Start Redis/);
+  assert.match(yml, /image: mysql:8/);
+  assert.match(yml, /os: \[ubuntu-latest]/);
+});
+
 test('no package.json', () => {
   clean();
 
