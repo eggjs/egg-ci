@@ -91,6 +91,7 @@ test('support custom service', () => {
   const yml = getYmlContent('service');
   assert.match(yml, /- name: Start Redis/);
   assert.match(yml, /image: mysql:8/);
+  assert.match(yml, /os: \[ubuntu-latest]/);
 });
 
 test('no package.json', () => {

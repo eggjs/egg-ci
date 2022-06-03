@@ -44,13 +44,10 @@ const config = {
 
 config.versions = arrayify(config.version);
 
-const os = arrayify(config.os).map(name => {
-  if (name === 'linux') name = 'ubuntu';
-  return `${name}-latest`;
-});
-
 let mysqlServer = '';
 if (config.service.mysql) {
+  // service only support on linux
+  config.os = 'linux';
   const mysql = {
     version: '8',
     db: 'unittest',
@@ -71,6 +68,8 @@ if (config.service.mysql) {
 
 let redisServer = '';
 if (config.service['redis-server']) {
+  // service only support on linux
+  config.os = 'linux';
   const redis = {
     version: '6',
     ...config.service['redis-server'],
@@ -83,6 +82,11 @@ if (config.service['redis-server']) {
         redis-version: ${redis.version}
 `;
 }
+
+const os = arrayify(config.os).map(name => {
+  if (name === 'linux') name = 'ubuntu';
+  return `${name}-latest`;
+});
 
 const ymlContent = getTpl('github.yml')
   .replace('{{github_node_version}}', config.versions.join(', '))
