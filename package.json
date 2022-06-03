@@ -1,6 +1,6 @@
 {
   "name": "egg-ci",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Auto gen ci config file",
   "main": "index.js",
   "files": [

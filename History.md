@@ -1,4 +1,10 @@
 
+2.1.0 / 2022-06-03
+==================
+
+**others**
+  * [[`5feaed6`](http://github.com/eggjs/egg-ci/commit/5feaed6a7757efe62586c613d3fec812b97493f4)] - 📦 NEW: Support custom service (#38) (fengmk2 <<fengmk2@gmail.com>>)
+
 2.0.0 / 2022-06-03
 ==================
 
