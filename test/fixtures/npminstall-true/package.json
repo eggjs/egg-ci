@@ -2,9 +2,9 @@
   "name": "egg-ci",
   "version": "1.0.0",
   "scripts": {
-    "ci": "npm run cov"
+    "ci-test": "npm run cov"
   },
   "ci": {
-    "version": [ 1, 2, 4, 5 ]
+    "npminstall": true
   }
 }

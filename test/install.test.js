@@ -1,10 +1,10 @@
 'use strict';
 
-const test = require('ava');
+const test = require('test');
+const assert = require('assert');
 const execSync = require('child_process').execSync;
 const fs = require('fs');
 const path = require('path');
-const rimraf = require('rimraf');
 
 const filepath = path.join(__dirname, '../install.js');
 const cmd = `node ${filepath}`;
@@ -12,215 +12,116 @@ const cmd = `node ${filepath}`;
 function clean() {
   const root = path.join(__dirname, 'fixtures');
   fs.readdirSync(root).forEach(name => {
-    [ '.travis.yml', 'appveyor.yml', 'LICENSE' ].forEach(file => {
-      rimraf.sync(path.join(root, name, file));
+    [ '.github', 'LICENSE' ].forEach(file => {
+      fs.rmSync(path.join(root, name, file), { force: true, recursive: true });
     });
   });
 }
 
-test.before(clean);
+test('default', () => {
+  clean();
 
-test('travis and npminstall = false', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('travis') });
-  execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('travis', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- '1'/);
-  t.regex(yml, /\- '2'/);
-  t.regex(yml, /\- '4'/);
-  t.regex(yml, /\- '5'/);
-  t.regex(yml, /after_script:/);
-  t.regex(yml, /\- npm i codecov && codecov/);
-  t.notRegex(yml, /os:/);
-  t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
-  t.falsy(fs.existsSync(getYml('travis', 'LICENSE')));
-});
-
-test('travis with os: linux and osx', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('travis-os') });
-  execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('travis-os', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- '1'/);
-  t.regex(yml, /\- '2'/);
-  t.regex(yml, /\- '4'/);
-  t.regex(yml, /\- '5'/);
-  t.regex(yml, /os:/);
-  t.regex(yml, / - linux/);
-  t.regex(yml, / - osx/);
-  t.regex(yml, /before_install:/);
-  t.regex(yml, /- npm i npminstall -g/);
-  t.regex(yml, /after_script:/);
-  t.falsy(fs.existsSync(getYml('travis-os', 'appveyor.yml')));
-  t.falsy(fs.existsSync(getYml('travis-os', 'LICENSE')));
-});
-
-test('travis and versions in array', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('array') });
-  execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('travis', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- '1'/);
-  t.regex(yml, /\- '2'/);
-  t.regex(yml, /\- '4'/);
-  t.regex(yml, /\- '5'/);
-  t.falsy(fs.existsSync(getYml('travis', 'appveyor.yml')));
-});
-
-test('default', t => {
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('default') });
   execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('default', '.travis.yml'), 'utf8');
-  t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall -g/);
-  t.regex(yml, /\- '8'/);
-  t.regex(yml, /\- '10'/);
-  t.regex(yml, /\- '12'/);
-  t.regex(yml, /\- npm run ci/);
-  t.regex(yml, /\- npminstall codecov && codecov/);
-  const appveyoryml = fs.readFileSync(getYml('default', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '8'/);
-  t.regex(appveyoryml, /\- nodejs_version: '10'/);
-  t.regex(appveyoryml, /\- nodejs_version: '12'/);
-  t.regex(appveyoryml, /\- npm run test/);
+  const yml = getYmlContent('default');
+  assert.match(yml, /run: npm i/);
+  assert.match(yml, /os: \[ubuntu-latest, windows-latest, macos-latest]/);
+  assert.match(yml, /run: npm run ci/);
+  assert(fs.existsSync(getYml('default', 'LICENSE')) === false);
 });
 
-test('nyc = true', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('nyc-true') });
+test('npminstall = true', () => {
+  clean();
+
+  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('npminstall-true') });
   execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('nyc-true', '.travis.yml'), 'utf8');
-  t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall -g/);
-  t.regex(yml, /\- '8'/);
-  t.regex(yml, /\- '10'/);
-  t.regex(yml, /\- '12'/);
-  t.regex(yml, /\- npm run ci/);
-  t.regex(yml, /\- npminstall codecov && codecov --disable=gcov -f \.nyc_output\/\*\.json/);
+  const yml = getYmlContent('npminstall-true');
+  assert.match(yml, /run: npm i -g npminstall && npminstall/);
 });
 
-test('azure-pipelines', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('azure-pipelines') });
+test('versions in array', () => {
+  clean();
+
+  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('array') });
   execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('azure-pipelines', 'azure-pipelines.yml'), 'utf8');
-  const ymlTpl = fs.readFileSync(getYml('azure-pipelines', 'azure-pipelines.template.yml'), 'utf8');
-  t.regex(ymlTpl, /npm i npminstall && npminstall/);
-  t.regex(ymlTpl, /node_4/);
-  t.regex(ymlTpl, /node_version: 4/);
-  t.regex(ymlTpl, /node_6/);
-  t.regex(ymlTpl, /node_version: 6/);
-  t.regex(ymlTpl, /node_8/);
-  t.regex(ymlTpl, /node_version: 8/);
-  t.regex(ymlTpl, /node_10/);
-  t.regex(ymlTpl, /node_version: 10/);
-  t.regex(yml, /name: windows/);
-  t.regex(yml, /name: macos/);
+  const yml = getYmlContent('array');
+  assert.match(yml, /node-version: \[1, 2, 4, 5]/);
 });
 
-test('default on install-node', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('install-node') });
-  execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('install-node', '.travis.yml'), 'utf8');
-  t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall -g/);
-  t.regex(yml, /\- '6'/);
-  const appveyoryml = fs.readFileSync(getYml('install-node', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '6'/);
-});
+test('support custom ci', () => {
+  clean();
 
-test('default on install-alinode', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('install-alinode') });
-  execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('install-alinode', '.travis.yml'), 'utf8');
-  t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall -g/);
-  t.regex(yml, /\- '6'/);
-  const appveyoryml = fs.readFileSync(getYml('install-alinode', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '6'/);
-});
-
-test('default on install-node-with-versions and ci.versions', t => {
-  const env = Object.assign({}, process.env, {
-    CI_ROOT_FOR_TEST: getRoot('install-node-with-versions'),
-  });
-  execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('install-node-with-versions', '.travis.yml'), 'utf8');
-  t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall -g/);
-  t.regex(yml, /\- '0\.12'/);
-  t.regex(yml, /\- '4'/);
-  t.regex(yml, /\- '5'/);
-  const appveyoryml = fs.readFileSync(getYml('install-node-with-versions', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
-  t.regex(appveyoryml, /\- nodejs_version: '0\.12'/);
-  t.regex(appveyoryml, /\- nodejs_version: '4'/);
-  t.regex(appveyoryml, /\- nodejs_version: '5'/);
-});
-
-test('support custom ci', t => {
   const env = Object.assign({}, process.env, {
     CI_ROOT_FOR_TEST: getRoot('ci'),
   });
   execSync(cmd, { env });
-  const yml = fs.readFileSync(getYml('ci', '.travis.yml'), 'utf8');
-  t.regex(yml, /\- npm run ci-travis/);
-  const appveyoryml = fs.readFileSync(getYml('ci', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm run ci-appveyor/);
+  const yml = getYmlContent('ci');
+  assert.match(yml, /run: npm run ci-github/);
 });
 
-test('no package.json', t => {
+test('support custom os: linux', () => {
+  clean();
+
+  const env = Object.assign({}, process.env, {
+    CI_ROOT_FOR_TEST: getRoot('os-linux'),
+  });
+  execSync(cmd, { env });
+  const yml = getYmlContent('os-linux');
+  assert.match(yml, /os: \[ubuntu-latest]/);
+});
+
+test('support custom os: ubuntu', () => {
+  clean();
+
+  const env = Object.assign({}, process.env, {
+    CI_ROOT_FOR_TEST: getRoot('os-ubuntu'),
+  });
+  execSync(cmd, { env });
+  const yml = getYmlContent('os-ubuntu');
+  assert.match(yml, /os: \[ubuntu-latest, windows-latest]/);
+});
+
+test('no package.json', () => {
+  clean();
+
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('no-pkg') });
   execSync(cmd, { env });
-  t.falsy(fs.existsSync(getYml('no-pkg', '.travis.yml')));
-  t.falsy(fs.existsSync(getYml('no-pkg', 'appveyor.yml')));
+  assert(!fs.existsSync(getYml('no-pkg', '.github')));
 });
 
-test('error package.json', t => {
+test('error package.json', () => {
+  clean();
+
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('error-pkg') });
   execSync(cmd, { env });
-  t.falsy(fs.existsSync(getYml('error-pkg', '.travis.yml')));
-  t.falsy(fs.existsSync(getYml('error-pkg', 'appveyor.yml')));
+  assert(!fs.existsSync(getYml('error-pkg', '.github')));
 });
 
-test('generate LICENSE', t => {
+test('generate LICENSE', () => {
+  clean();
+
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license') });
   execSync(cmd, { env });
   const file = fs.readFileSync(getRoot('license/LICENSE'), 'utf8');
-  t.regex(file, new RegExp('2017-present Alibaba Group Holding Limited and other contributors.'));
+  assert.match(file, new RegExp('2017-present Alibaba Group Holding Limited and other contributors.'));
 });
 
-test('generate LICENSE with object', t => {
+test('generate LICENSE with object', () => {
+  clean();
+
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license-object') });
   execSync(cmd, { env });
   const file = fs.readFileSync(getRoot('license-object/LICENSE'), 'utf8');
-  t.regex(file, /2017-present egg-ci/);
+  assert.match(file, /2017-present egg-ci/);
 });
 
-test('generate LICENSE with year', t => {
+test('generate LICENSE with year', () => {
+  clean();
+
   const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('license-year') });
   execSync(cmd, { env });
   const file = fs.readFileSync(getRoot('license-year/LICENSE'), 'utf8');
-  t.regex(file, new RegExp(/2014-present egg-ci/));
-});
-
-test('generate service with string', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('service') });
-  execSync(cmd, { env, stdout: [ 0, 1, 2 ] });
-  let file = fs.readFileSync(getRoot('service/.travis.yml'), 'utf8');
-  t.regex(file, /services/);
-  t.regex(file, /- redis-server/);
-  t.regex(file, /- mysql/);
-  file = fs.readFileSync(getRoot('service/appveyor.yml'), 'utf8');
-  t.regex(file, /services/);
-  t.regex(file, /- redis-server/);
-  t.regex(file, /- mysql/);
-  t.regex(file, /redis-server.exe/);
-});
-
-test('generate without after_script', t => {
-  const env = Object.assign({}, process.env, { CI_ROOT_FOR_TEST: getRoot('disable-after-script') });
-  execSync(cmd, { env, stdout: [ 0, 1, 2 ] });
-  const file = fs.readFileSync(getRoot('disable-after-script/.travis.yml'), 'utf8');
-  t.falsy(/after_script:/.test(file));
+  assert.match(file, new RegExp(/2014-present egg-ci/));
 });
 
 function getRoot(name) {
@@ -229,4 +130,8 @@ function getRoot(name) {
 
 function getYml(name, yml) {
   return path.join(__dirname, 'fixtures', name, yml);
+}
+
+function getYmlContent(name) {
+  return fs.readFileSync(path.join(__dirname, 'fixtures', name, '.github/workflows/nodejs.yml'), 'utf8');
 }

@@ -5,6 +5,6 @@
     "ci-test": "npm run cov"
   },
   "ci": {
-    "nyc": true
+    "os": "linux, windows"
   }
 }
