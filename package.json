@@ -47,6 +47,9 @@
   "engine": {
     "node": ">=8.0.0"
   },
+  "publishConfig": {
+    "tag": "latest-1"
+  },
   "ava": {
     "files": [
       "test/**/*.test.js"
