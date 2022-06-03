@@ -38,22 +38,59 @@ const config = {
   nyc: false,
   license: false,
   command: 'ci',
+  service: {},
   ...pkg.ci,
 };
 
 config.versions = arrayify(config.version);
-// if (config.services) config.services = arrayify(config.services);
 
 const os = arrayify(config.os).map(name => {
   if (name === 'linux') name = 'ubuntu';
   return `${name}-latest`;
 });
 
+let mysqlServer = '';
+if (config.service.mysql) {
+  const mysql = {
+    version: '8',
+    db: 'unittest',
+    ...config.service.mysql,
+  };
+  mysqlServer = `
+    services:
+      mysql:
+        image: mysql:${mysql.version}
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: ${mysql.db}
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+`;
+}
+
+let redisServer = '';
+if (config.service['redis-server']) {
+  const redis = {
+    version: '6',
+    ...config.service['redis-server'],
+  };
+  redisServer = `
+    # https://github.com/marketplace/actions/redis-server-in-github-actions#usage
+    - name: Start Redis
+      uses: supercharge/redis-github-action@1.4.0
+      with:
+        redis-version: ${redis.version}
+`;
+}
+
 const ymlContent = getTpl('github.yml')
   .replace('{{github_node_version}}', config.versions.join(', '))
   .replace('{{github_os}}', os.join(', '))
   .replace('{{github_command_ci}}', config.command)
-  .replace('{{github_npm_install}}', config.npminstall ? 'npm i -g npminstall && npminstall' : 'npm i');
+  .replace('{{github_npm_install}}', config.npminstall ? 'npm i -g npminstall && npminstall' : 'npm i')
+  .replace('{{mysql}}', mysqlServer)
+  .replace('{{redis-server}}', redisServer);
 const ymlName = '.github/workflows/nodejs.yml';
 const ymlPath = path.join(root, ymlName);
 fs.mkdirSync(path.dirname(ymlPath), { recursive: true });

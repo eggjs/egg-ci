@@ -18,7 +18,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-
+{{mysql}}
     strategy:
       fail-fast: false
       matrix:
@@ -33,7 +33,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-
+{{redis-server}}
     - name: Install Dependencies
       run: {{github_npm_install}}
 

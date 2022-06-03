@@ -32,7 +32,15 @@ Add `ci` property to your `package.json`:
   "version": "14, 16, 18", // test LTS node version by default
   // npm ci command
   "command": "ci",
-  "services": "redis-server, mysql", // custom service
+  // custom service
+  "service": {
+    "mysql": {
+      "version": "8"
+    },
+    "redis-server": {
+      "version": "6"
+    }
+  },
   "license": false // generate license
 }
 ```
