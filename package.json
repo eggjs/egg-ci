@@ -8,6 +8,7 @@
     "install.js"
   ],
   "scripts": {
+    "contributor": "git-contributor",
     "env": "node -e 'console.log(process.env)'",
     "test": "node--test",
     "cov": "c8 node--test && c8 report --reporter=json --reporter=lcov",
@@ -38,6 +39,7 @@
     "c8": "7",
     "eslint": "8",
     "eslint-config-egg": "11",
+    "git-contributor": "1",
     "test": "3"
   },
   "engine": {
