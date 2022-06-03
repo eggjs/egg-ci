@@ -1,4 +1,10 @@
 
+2.0.0 / 2022-06-03
+==================
+
+**others**
+  * [[`cb2f2f2`](http://github.com/eggjs/egg-ci/commit/cb2f2f2605bfb0765c6b0802fdb1f98c0e69c5b1)] - 📦 NEW: Only support GitHub Action and Node.js 14 (#37) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.19.0 / 2021-09-16
 ==================
 
