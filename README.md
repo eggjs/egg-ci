@@ -13,7 +13,7 @@ egg-ci
 [download-image]: https://img.shields.io/npm/dm/egg-ci.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-ci
 
-Auto gen ci config file.
+Auto gen [GitHub Action](https://github.com/features/actions) ci config file.
 
 ## Installation
 
@@ -27,7 +27,7 @@ Add `ci` property to your `package.json`:
 
 ```js
 "ci": {
-  "os":  "linux, windows, macos",
+  "os": "linux, windows, macos",
   "npminstall": false, // use `npminstall` or `npm install`, default is false
   "version": "14, 16, 18", // test LTS node version by default
   // npm ci command
