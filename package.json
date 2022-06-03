@@ -50,14 +50,6 @@
     "os": "linux, macos, windows",
     "license": {
       "year": 2017
-    },
-    "service": {
-      "mysql": {
-        "version": "8"
-      },
-      "redis-server": {
-        "version": "6"
-      }
     }
   }
 }
