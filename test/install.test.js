@@ -59,6 +59,28 @@ test('support custom ci', () => {
   assert.match(yml, /run: npm run ci-github/);
 });
 
+test('support custom os: linux', () => {
+  clean();
+
+  const env = Object.assign({}, process.env, {
+    CI_ROOT_FOR_TEST: getRoot('os-linux'),
+  });
+  execSync(cmd, { env });
+  const yml = getYmlContent('os-linux');
+  assert.match(yml, /os: \[ubuntu-latest]/);
+});
+
+test('support custom os: ubuntu', () => {
+  clean();
+
+  const env = Object.assign({}, process.env, {
+    CI_ROOT_FOR_TEST: getRoot('os-ubuntu'),
+  });
+  execSync(cmd, { env });
+  const yml = getYmlContent('os-ubuntu');
+  assert.match(yml, /os: \[ubuntu-latest, windows-latest]/);
+});
+
 test('no package.json', () => {
   clean();
 
