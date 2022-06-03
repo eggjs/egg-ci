@@ -5,8 +5,6 @@
     "ci": "npm run cov"
   },
   "ci": {
-    "type": [ "travis" ],
-    "version": [ 1, 2, 4, 5 ],
-    "npminstall": false
+    "version": [ 1, 2, 4, 5 ]
   }
 }

@@ -1,9 +1,0 @@
-{
-  "name": "foo",
-  "engines": {
-    "install-node": "4.4"
-  },
-  "ci": {
-    "version": "0.12, 4, 5"
-  }
-}
