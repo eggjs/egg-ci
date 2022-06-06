@@ -47,7 +47,7 @@ test('travis with os: linux and osx', t => {
   t.regex(yml, / - linux/);
   t.regex(yml, / - osx/);
   t.regex(yml, /before_install:/);
-  t.regex(yml, /- npm i npminstall@1 -g/);
+  t.regex(yml, /- npm i npminstall@5 -g/);
   t.regex(yml, /after_script:/);
   t.falsy(fs.existsSync(getYml('travis-os', 'appveyor.yml')));
   t.falsy(fs.existsSync(getYml('travis-os', 'LICENSE')));
@@ -69,14 +69,14 @@ test('default', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('default', '.travis.yml'), 'utf8');
   t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall@1 -g/);
+  t.regex(yml, /\- npm i npminstall@5 -g/);
   t.regex(yml, /\- '8'/);
   t.regex(yml, /\- '10'/);
   t.regex(yml, /\- '12'/);
   t.regex(yml, /\- npm run ci/);
   t.regex(yml, /\- npminstall codecov && codecov/);
   const appveyoryml = fs.readFileSync(getYml('default', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm i npminstall@1 && node_modules\\.bin\\npminstall/);
+  t.regex(appveyoryml, /\- npm i npminstall@5 && node_modules\\.bin\\npminstall/);
   t.regex(appveyoryml, /\- nodejs_version: '8'/);
   t.regex(appveyoryml, /\- nodejs_version: '10'/);
   t.regex(appveyoryml, /\- nodejs_version: '12'/);
@@ -88,7 +88,7 @@ test('nyc = true', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('nyc-true', '.travis.yml'), 'utf8');
   t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall@1 -g/);
+  t.regex(yml, /\- npm i npminstall@5 -g/);
   t.regex(yml, /\- '8'/);
   t.regex(yml, /\- '10'/);
   t.regex(yml, /\- '12'/);
@@ -101,7 +101,7 @@ test('azure-pipelines', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('azure-pipelines', 'azure-pipelines.yml'), 'utf8');
   const ymlTpl = fs.readFileSync(getYml('azure-pipelines', 'azure-pipelines.template.yml'), 'utf8');
-  t.regex(ymlTpl, /npm i npminstall@1 && npminstall/);
+  t.regex(ymlTpl, /npm i npminstall@5 && npminstall/);
   t.regex(ymlTpl, /node_4/);
   t.regex(ymlTpl, /node_version: 4/);
   t.regex(ymlTpl, /node_6/);
@@ -119,7 +119,7 @@ test('default on install-node', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('install-node', '.travis.yml'), 'utf8');
   t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall@1 -g/);
+  t.regex(yml, /\- npm i npminstall@5 -g/);
   t.regex(yml, /\- '6'/);
   const appveyoryml = fs.readFileSync(getYml('install-node', 'appveyor.yml'), 'utf8');
   t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
@@ -131,10 +131,10 @@ test('default on install-alinode', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('install-alinode', '.travis.yml'), 'utf8');
   t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall@1 -g/);
+  t.regex(yml, /\- npm i npminstall@5 -g/);
   t.regex(yml, /\- '6'/);
   const appveyoryml = fs.readFileSync(getYml('install-alinode', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm i npminstall@1 && node_modules\\.bin\\npminstall/);
+  t.regex(appveyoryml, /\- npm i npminstall@5 && node_modules\\.bin\\npminstall/);
   t.regex(appveyoryml, /\- nodejs_version: '6'/);
 });
 
@@ -145,12 +145,12 @@ test('default on install-node-with-versions and ci.versions', t => {
   execSync(cmd, { env });
   const yml = fs.readFileSync(getYml('install-node-with-versions', '.travis.yml'), 'utf8');
   t.regex(yml, /before_install:/);
-  t.regex(yml, /\- npm i npminstall@1 -g/);
+  t.regex(yml, /\- npm i npminstall@5 -g/);
   t.regex(yml, /\- '0\.12'/);
   t.regex(yml, /\- '4'/);
   t.regex(yml, /\- '5'/);
   const appveyoryml = fs.readFileSync(getYml('install-node-with-versions', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm i npminstall@1 && node_modules\\.bin\\npminstall/);
+  t.regex(appveyoryml, /\- npm i npminstall@5 && node_modules\\.bin\\npminstall/);
   t.regex(appveyoryml, /\- nodejs_version: '0\.12'/);
   t.regex(appveyoryml, /\- nodejs_version: '4'/);
   t.regex(appveyoryml, /\- nodejs_version: '5'/);

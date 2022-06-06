@@ -37,7 +37,7 @@ jobs:
 {% endraw %}
   - script: |
       {%- if npminstall %}
-      npm i npminstall@1 && npminstall
+      npm i npminstall@5 && npminstall
       {%- else %}
       npm i
       {%- endif %}
