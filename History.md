@@ -1,4 +1,11 @@
 
+1.19.1 / 2022-06-06
+==================
+
+**others**
+  * [[`d7df81c`](http://github.com/eggjs/egg-ci/commit/d7df81c28ab901252f8bf7c3a81c0ac2d233c659)] - 🐛 FIX: Use npminstall v5 (#39) (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`dfc5ffa`](http://github.com/eggjs/egg-ci/commit/dfc5ffaff1eff1db4ca8e08e8d33f0ef229ad7bb)] - 📖 DOC: Add branch 1.x (fengmk2 <<fengmk2@gmail.com>>)
+
 1.19.0 / 2021-09-16
 ==================
 
