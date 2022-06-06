@@ -20,7 +20,7 @@ install:
   {%- endif %}
   - ps: Install-Product node $env:nodejs_version
   {%- if npminstall %}
-  - npm i npminstall && node_modules\.bin\npminstall
+  - npm i npminstall@5 && node_modules\.bin\npminstall
   {%- else %}
   - npm i
   {%- endif %}

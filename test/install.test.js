@@ -122,7 +122,7 @@ test('default on install-node', t => {
   t.regex(yml, /\- npm i npminstall@5 -g/);
   t.regex(yml, /\- '6'/);
   const appveyoryml = fs.readFileSync(getYml('install-node', 'appveyor.yml'), 'utf8');
-  t.regex(appveyoryml, /\- npm i npminstall && node_modules\\.bin\\npminstall/);
+  t.regex(appveyoryml, /\- npm i npminstall@5 && node_modules\\.bin\\npminstall/);
   t.regex(appveyoryml, /\- nodejs_version: '6'/);
 });
 
