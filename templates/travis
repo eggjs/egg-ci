@@ -14,7 +14,7 @@ node_js:
 {%- endfor %}
 {%- if npminstall %}
 before_install:
-  - npm i npminstall -g
+  - npm i npminstall@1 -g
 install:
   - npminstall
 {%- endif %}

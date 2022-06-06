@@ -120,7 +120,7 @@ for (const type of config.types) {
       .replace('{{github_node_version}}', config.versions.join(', '))
       .replace('{{github_os}}', os.join(', '))
       .replace('{{github_command_ci}}', config.command.github)
-      .replace('{{github_npm_install}}', config.npminstall ? 'npm i -g npminstall && npminstall' : 'npm i');
+      .replace('{{github_npm_install}}', config.npminstall ? 'npm i -g npminstall@1 && npminstall' : 'npm i');
     ymlName = '.github/workflows/nodejs.yml';
     let dir = path.join(root, '.github');
     if (!fs.existsSync(dir)) fs.mkdirSync(dir);
