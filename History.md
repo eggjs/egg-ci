@@ -1,4 +1,13 @@
 
+2.2.0 / 2022-10-29
+==================
+
+**features**
+  * [[`c1fb995`](http://github.com/eggjs/egg-ci/commit/c1fb995bae2e14a6943d4cc70e909ebd9a23c7c8)] - 👌 IMPROVE: Upgrade action versions (#40) (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`4770ccf`](http://github.com/eggjs/egg-ci/commit/4770ccf9b5ffe3286af798042e2dce2eb6f8ace7)] - Create codeql.yml (fengmk2 <<fengmk2@gmail.com>>)
+
 2.1.0 / 2022-06-03
 ==================
 
