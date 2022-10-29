@@ -37,10 +37,10 @@
   },
   "devDependencies": {
     "c8": "7",
-    "eslint": "8",
-    "eslint-config-egg": "11",
+    "eslint": "^8.26.0",
+    "eslint-config-egg": "^12.1.0",
     "git-contributor": "1",
-    "test": "3"
+    "test": "^3.2.1"
   },
   "engine": {
     "node": ">=14.0.0"
