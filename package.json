@@ -44,12 +44,5 @@
   },
   "engine": {
     "node": ">=14.0.0"
-  },
-  "ci": {
-    "version": "14, 16, 18",
-    "os": "linux, macos, windows",
-    "license": {
-      "year": 2017
-    }
   }
 }

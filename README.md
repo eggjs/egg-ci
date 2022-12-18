@@ -15,6 +15,8 @@ egg-ci
 
 Auto gen [GitHub Action](https://github.com/features/actions) ci config file.
 
+🚀 🚀 🚀 🚀 🚀 YOU SHOULD USE https://github.com/artusjs/github-actions instead. 🚀 🚀 🚀 🚀 🚀 
+
 ## Installation
 
 ```bash
